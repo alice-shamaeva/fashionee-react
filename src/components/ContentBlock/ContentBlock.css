@@ -1,0 +1,110 @@
+.page-banner {
+    display: flex;
+    align-items: center;
+    margin: 50px auto 0;
+    gap: 150px;
+    max-width: 1860px;
+    width: 100%;
+    padding: 0 60px 0 330px;
+}
+
+.page-banner .page-banner-info {
+    flex: 1;
+    position: relative;
+}
+
+.page-banner .page-banner-info::before {
+    content: "";
+    position: absolute;
+    width: 354px;
+    height: 322px;
+    background-image: url("../../assets/dot.svg");
+    background-repeat: repeat;
+    top: -107px;
+    left: -300px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 50%;
+}
+
+.page-banner-info::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background-color: #000;
+    width: 850px;
+    right: 23px;
+    bottom: -20px;
+}
+
+.page-banner .page-banner-info h1 {
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 100%;
+    margin-bottom: 21px;
+}
+
+.page-banner .page-banner-info .navigation {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    display: flex;
+    gap: 12px;
+    padding-left: 12px;
+    border-left: 2px solid rgba(0, 0, 0, 1);
+}
+
+.page-banner .page-banner-info .navigation .nav-item {
+}
+
+.page-banner .page-banner-info .navigation .nav-item.active {
+    color: rgba(255, 142, 142, 1);
+}
+
+.page-banner .page-banner-image {
+    flex: 0 1 800px;
+    max-width: 800px;
+    width: 100%;
+    height: 400px;
+    background: rgba(241, 242, 243, 1);
+}
+
+@media (max-width: 1024px) {
+    .page-banner {
+        padding: 0 30px;
+        gap: 40px;
+    }
+
+    .page-banner .page-banner-info {
+        flex: 0 0 220px;
+    }
+}
+
+@media (max-width: 887px) {
+    .page-banner {
+        flex-direction: column;
+    }
+
+    .page-banner .page-banner-image {
+        flex: 0 1 300px;
+    }
+
+    .page-banner .page-banner-info .navigation {
+        justify-self: center;
+    }
+
+    .page-banner .page-banner-info h1 {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 425px) {
+    .page-banner .page-banner-info {
+        flex: 0 0 90px;
+    }
+
+    .page-banner .page-banner-info::before {
+        height: 170px;
+    }
+}
