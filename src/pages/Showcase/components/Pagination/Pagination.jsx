@@ -31,7 +31,7 @@ function Pagination({ setPage, pagesCount, currentPage }) {
                     )
                 })}
             </div>
-            <div className={currentPage < pagesCount ? "button right disabled" : "button right"} onClick={handleNextPage}>
+            <div className={currentPage === pagesCount ? "button right disabled" : "button right"} onClick={handleNextPage}>
                 <img src={rightPaginArrow} alt="Right Pagination Arrow"/>
             </div>
         </div>
