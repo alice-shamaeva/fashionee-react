@@ -1,9 +1,11 @@
 import ProductCard from "../ProductCard/ProductCard.jsx";
 
-function ProductList() {
+function ProductList({ products }) {
     return (
         <div className="products">
-            <ProductCard />
+            {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+            ))}
         </div>
     );
 }

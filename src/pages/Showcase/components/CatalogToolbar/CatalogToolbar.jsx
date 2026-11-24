@@ -1,8 +1,8 @@
-function CatalogToolbar() {
+function CatalogToolbar({ count }) {
     return (
         <div className="sort-and-count">
             <div className="products-count">
-                There are <span className="bold">67</span> products in this category
+                There are <span className="bold">{count}</span> products in this category
             </div>
             <div className="sort">
                 <select className="input">

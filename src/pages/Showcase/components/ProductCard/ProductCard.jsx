@@ -1,27 +1,31 @@
 import heart from '../../../../assets/heart.svg';
 
-function ProductCard() {
+function ProductCard({ product }) {
     return (
         <div className="product">
             <div className="photo">
+                <img src={product.image} alt={product.name} />
                 <div className="top-bar">
                     <div className="labels">
-                        <div className="label sale">
+                        {product.isSale && <div className="label sale">
                             Sale
-                        </div>
+                        </div>}
+                        {product.isNew && <div className="label new">
+                            New
+                        </div>}
                     </div>
                     <div className="favorites">
-                        <img src={heart} alt=""/>
+                        <img src={heart} alt="Heart Icon"/>
                     </div>
                 </div>
             </div>
             <div className="info">
                 <div className="name">
-                    Textured turtleneck with zip
+                    {product.name}
                 </div>
                 <div className="price">
-                    <div className="current-price">$53.99</div>
-                    <div className="old-price">$52.99</div>
+                    <div className="current-price">${product.price.toFixed(2)}</div>
+                    {product.oldPrice !== null && <div className="old-price">${product.oldPrice.toFixed(2)}</div>}
                 </div>
             </div>
         </div>
