@@ -12,6 +12,18 @@
     gap: 50px;
 }
 
+.shop .sidebar .mobile-filters .filters-checkbox:checked ~ .filters-content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.shop .sidebar .mobile-filters .filters-content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
 .shop .sidebar .search {
     position: relative;
 }
@@ -277,6 +289,7 @@
     opacity: 0.5;
     width: 10px;
     text-align: center;
+    cursor: pointer;
 }
 
 .shop .products-wrapper .pagination .pages .page.active {
@@ -288,16 +301,8 @@
     text-align: center;
 }
 
-.shop .sidebar .mobile-filters {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.shop .sidebar .mobile-filters .filters-checkbox:checked ~ .filters-content {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+.shop .products-wrapper .pagination .button {
+    cursor: pointer;
 }
 
 .newsletter {

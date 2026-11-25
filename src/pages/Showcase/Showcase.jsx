@@ -7,24 +7,38 @@ import productsData from "../../data/products.json"
 import {useState} from "react";
 
 const productsList = productsData.products;
-const productsCount = productsList.length;
 
 function Showcase() {
     const [currentPage, setPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const filteredProducts = productsList.filter((product) => {
+        return product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
+    const productsCount = filteredProducts.length;
+
     const productsPerPage = 12;
     const pagesCount = Math.ceil(productsCount / productsPerPage);
     const endIndex = currentPage * productsPerPage;
     const startIndex =  endIndex - productsPerPage;
-    const currentProducts = productsList.slice(startIndex, endIndex);
+    const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+    const handleSearchChange = (value) => {
+        setSearchQuery(value);
+        setPage(1);
+    };
 
     return (
         <div className="container">
             <div className="shop">
-                <Sidebar />
+                <Sidebar searchQuery={searchQuery} searchChange={handleSearchChange} />
                 <div className="products-wrapper">
                     <CatalogToolbar count={productsCount} />
                     <ProductList products={currentProducts} />
-                    <Pagination setPage={setPage} pagesCount={pagesCount} currentPage={currentPage} />
+                    {pagesCount > 1 && (
+                        <Pagination setPage={setPage} pagesCount={pagesCount} currentPage={currentPage} />
+                    )}
                 </div>
             </div>
         </div>

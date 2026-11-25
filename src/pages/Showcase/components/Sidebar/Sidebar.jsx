@@ -3,10 +3,10 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 import ReviewedProducts from "../ReviewedProducts/ReviewedProducts.jsx";
 import banner from '../../../../assets/season-sale-banner.svg';
 
-function Sidebar() {
+function Sidebar({ searchQuery, searchChange }) {
     return (
         <div className="sidebar">
-            <SearchBar/>
+            <SearchBar searchQuery={searchQuery} searchChange={searchChange} />
             <Filters/>
             <ReviewedProducts/>
             <div className="sidebar-banner">

@@ -6,6 +6,7 @@ function ProductList({ products }) {
             {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
             ))}
+            {products.length === 0 && <div>No products found</div>}
         </div>
     );
 }
