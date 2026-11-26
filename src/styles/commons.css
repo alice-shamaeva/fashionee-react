@@ -24,34 +24,6 @@ body {
     line-height: 24px;
 }
 
-.button-wrapper {
-    display: flex;
-    gap: 2px;
-    align-items: center;
-    max-width: 240px;
-    width: 100%;
-    cursor: pointer;
-}
-
-.button-wrapper .button {
-    color: rgba(255, 255, 255, 1);
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 16px;
-    text-align: center;
-    border: none;
-    background: rgba(0, 0, 0, 1);
-    padding: 17px 74px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.button-wrapper .vertical-line {
-    width: 2px;
-    height: 100%;
-    background: rgba(0, 0, 0, 1);
-}
-
 .container .price {
     display: flex;
     gap: 15px;
