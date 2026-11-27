@@ -5,8 +5,15 @@ import Pagination from "./components/Pagination/Pagination.jsx";
 import "./Showcase.css"
 import productsData from "../../data/products.json"
 import {useState} from "react";
+import FiltersContext from "./FiltersContext.jsx";
 
 const productsList = productsData.products;
+const availableColors = [...new Set(productsList.map((product) => product.color))];
+const availableCategories = ["All", ...new Set(productsList.flatMap((product) => product.categories)), "New Arrivals"];
+
+const prices = productsList.map((product) => product.price);
+const availableMinPrice = Math.min(...prices);
+const availableMaxPrice = Math.max(...prices);
 
 function Showcase() {
     const [currentPage, setPage] = useState(1);
@@ -55,17 +62,14 @@ function Showcase() {
 
     const handleMinPriceChange = (value) => {
         setMinPrice(value);
-        setPage(1);
     }
 
     const handleMaxPriceChange = (value) => {
         setMaxPrice(value);
-        setPage(1);
     }
 
     const handleSelectedCategoryChange = (value) => {
         setSelectedCategory(value);
-        setPage(1);
     }
 
     const handleAppliedFilters = () => {
@@ -92,13 +96,31 @@ function Showcase() {
         }
 
         setSelectedColors(newColors);
-        setPage(1);
     }
 
     return (
         <div className="container">
             <div className="shop">
-                <Sidebar searchQuery={searchQuery} maxPrice={maxPrice} minPrice={minPrice} searchChange={handleSearchChange} maxPriceChange={handleMaxPriceChange} minPriceChange={handleMinPriceChange} selectedCategoryChange={handleSelectedCategoryChange} selectedCategory={selectedCategory} selectedColors={selectedColors} selectedColorsChange={handleSelectedColorsChange} appliedFilters={handleAppliedFilters}/>
+                <FiltersContext.Provider value={{
+                    availableCategories,
+                    selectedCategory,
+                    selectedCategoryChange: handleSelectedCategoryChange,
+                    availableColors,
+                    selectedColors,
+                    selectedColorsChange: handleSelectedColorsChange,
+                    minPrice,
+                    maxPrice,
+                    availableMinPrice,
+                    availableMaxPrice,
+                    minPriceChange: handleMinPriceChange,
+                    maxPriceChange: handleMaxPriceChange,
+                    applyFilters: handleAppliedFilters }}
+                >
+
+                    <Sidebar searchQuery={searchQuery} searchChange={handleSearchChange} />
+
+                </FiltersContext.Provider>
+
                 <div className="products-wrapper">
                     <CatalogToolbar count={productsCount} sortOrderChange={handleSortOrder} sortOrder={sortOrder}/>
                     <ProductList products={currentProducts} />
