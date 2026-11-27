@@ -4,7 +4,7 @@ import ProductList from './components/ProductList/ProductList.jsx';
 import Pagination from "./components/Pagination/Pagination.jsx";
 import "./Showcase.css"
 import productsData from "../../data/products.json"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import FiltersContext from "./FiltersContext.jsx";
 
 const productsList = productsData.products;
@@ -29,9 +29,20 @@ function Showcase() {
         colors: [],
     });
     const [sortOrder, setSortOrder] = useState("RELEVANCE");
+    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearchQuery(searchQuery);
+            setPage(1);
+        }, 500)
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [searchQuery]);
 
     const filteredProducts = productsList.filter((product) => {
-        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesSearch = product.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
         const matchesMinPrice = appliedFilters.minPrice === "" || product.price >= Number(appliedFilters.minPrice);
         const matchesMaxPrice = appliedFilters.maxPrice === "" || product.price <= Number(appliedFilters.maxPrice);
         const matchesCategory = appliedFilters.category === "All" || (appliedFilters.category === "New Arrivals" && product.isNew) || product.categories.includes(appliedFilters.category);
@@ -57,7 +68,6 @@ function Showcase() {
 
     const handleSearchChange = (value) => {
         setSearchQuery(value);
-        setPage(1);
     };
 
     const handleMinPriceChange = (value) => {
